@@ -10,4 +10,10 @@ class UserSerializer(serializers.ModelSerializer):
         
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data['avatar'] =  f'{settings.CURRENT_URL}{instance.avatar}'
+
+        if instance.avatar:
+            data['avatar'] = f'{settings.CURRENT_URL}{instance.avatar}'
+        else:
+            data['avatar'] = None  
+        
+        return data
